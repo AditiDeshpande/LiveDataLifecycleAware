@@ -1,0 +1,21 @@
+
+Steps to work with LiveData objects
+1. create instance to hold a certain type of data. This uis usually
+done within ViewModel class
+2. Create an Observer object that defines onChanged() method, which
+controls what happens when the LiveData object's held data changes.
+Usually create an Observer object in an UI controller such as activity
+or Fragment.
+3. Attach Observer object to the LiveData using observe() method takes
+a LifeCycleOwner object. This subscribes the Observer object to the
+LiveData object so that it is notified of changes. U usually attach
+Observer object in an UI controller , such as an activity / fragment
+
+*Note:
+u can register an observer without associated LifecycleOwner object
+using observerForever(Observer) method. In this case , the observer
+is considered to be always active and is therefore always notified
+about notificatiobs. u can remove these observers calling
+removeObserver(Observer) method.
+
+
