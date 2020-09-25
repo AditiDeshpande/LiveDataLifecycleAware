@@ -1,0 +1,12 @@
+MediatorLiveData
+MediatorLiveData is a subclass of LiveData that allows u to merge multiple
+LiveData sources.
+e.g If u have LiveData object in your UI that can be updated from a local
+DB or a network. Then u can add foll. sources to the MediatorLiveData object:
+1. LiveData object associated with data stored in DB
+2. LiveData object associated with data accessed from the network
+
+Your activity only needs to observe the MediatorLiveData object to
+receive updates from both the sources.
+
+

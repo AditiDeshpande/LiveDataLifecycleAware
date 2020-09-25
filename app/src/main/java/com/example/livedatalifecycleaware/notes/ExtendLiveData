@@ -1,0 +1,7 @@
+Price Listener ex.
+
+Methods
+1. onActive()
+2. onInactive()
+3. setValue(T)
+

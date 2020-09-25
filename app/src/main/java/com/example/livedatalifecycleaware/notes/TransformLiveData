@@ -1,0 +1,35 @@
+Transform LiveData
+
+u may want to make changes to the value stored in a LiveData objet b4
+dispatching it to the observers, u may need to return a diff. LiveData
+instance based on value of another. The lifecycle package provides the
+Transformation class which includes helper methpds that support these
+scenarios.
+1. Transformations.map()
+Applies a function on the value stored in the LiveData object and propogates
+the result downstream.
+2. Transformations.switchMap()
+similar to map() this applies function to the value stored
+in LiveData object and unwraps and dispatches result downstream.
+The function passed to switchMap() must return a LiveData object.
+
+Example.
+class MyViewModel(private val repository: PostalCodeRepository) : ViewModel(){
+private val addressInput = MutableLiveData<String>()
+val postalCode: LiveData<String> = Transformations.switchMap(addressInput){
+address -> repository.getPostCode(address) }
+
+private fun setInput(address: String){
+addressInput.value = address
+}
+
+}
+
+In this case , the postalCode field is defined as a transformation of the
+addressInput. As long as your app has an active observer associated with
+the postalCode field , the field's value is recalculated and retrieved
+whenever addressInput changes.
+This mechanism allows lower levels of app to create LiveData objects
+that are lazily calculated on demand.A ViewModel object can easily obtain
+references to LiveData objects and then define transformation rules on top
+of them.
